@@ -1,0 +1,29 @@
+{% load i18n %}
+
+{% block subject %}
+{% blocktrans %}Account activation on {{ site_name }}{% endblocktrans %}
+{% endblock subject %}
+
+{% block text_body%}
+
+{% blocktrans %}Please finish your account creation process on {{ site_name }}. {% endblocktrans %}
+
+{% trans "Please go to the following page to activate your account:" %}
+{{ protocol }}://{{ domain }}/{{ url|safe }}
+
+{% trans "Thanks for using our site!" %}
+
+{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+
+{% endblock text_body %}
+
+{% block html_body%}
+<p>{% blocktrans %}Please finish your account creation process on {{ site_name }}. {% endblocktrans %}</p>
+
+<p>Please go to the <a href="{{ protocol }}://{{ domain }}/{{ url|safe }}">following page</a> to activate your account.</p>
+
+<p>Thanks for using our site!</p>
+
+<p>{% blocktrans %}The {{ site_name }} team{% endblocktrans %}</p>
+
+{% endblock html_body %}
