@@ -8,6 +8,9 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     
+    # Printing application
+    path('spss/', include('printing.api.urls')),
+    
     # Note model for testing
     path('notes/', include('account.api.urls'))
 ]

@@ -30,9 +30,8 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     
     # Other informative user fields
-    currentJob = models.CharField(max_length=50, default="Unemployed")
-    currentLocation = models.CharField(max_length=120, default="Nowhere")
-    shortDesc = models.CharField(max_length=100, default="Relatively hard-working and normal human being")
+    StudentID       = models.PositiveIntegerField(null=False, default=0)
+    Token           = models.PositiveIntegerField(null=False, default=0)
     
     # Choosing email as username for login/signup
     USERNAME_FIELD = 'email'
