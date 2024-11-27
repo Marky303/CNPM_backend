@@ -9,5 +9,5 @@ urlpatterns = [
     path('printdocument/', views.PrintDocument),
     path('viewanalysis/', views.ViewAnalysis),
     path('adjustparameters/', views.AdjustParameters),
-    
+    path('viewparameters/', views.ViewParameters),
 ]
