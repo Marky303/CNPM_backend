@@ -52,3 +52,22 @@ def ViewParameters(request):
         if str(e):
             error.append(str(e))
         return ResponseError(error)
+def EditParameters(request):
+    try:
+        error = []
+        
+        # Check new parameters
+        VerifyNewParameters(request, error)
+        
+        # Check if there is an error
+        if error:
+            raise Exception()
+        
+        # Response
+        return ResponseSuccessful("Parameters are being adjusted!")
+        
+    except Exception as e:
+        # Response a error code and error content
+        if str(e):
+            error.append(str(e))
+        return ResponseError(error)
