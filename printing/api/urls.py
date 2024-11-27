@@ -7,5 +7,7 @@ from . import views
 urlpatterns = [
     # Printing related urls
     path('printdocument/', views.PrintDocument),
+    path('viewanalysis/', views.ViewAnalysis),
+    path('adjustparameters/', views.AdjustParameters),
     
 ]
