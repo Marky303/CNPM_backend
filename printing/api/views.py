@@ -36,3 +36,19 @@ def PrintDocument(request):
         if str(e):
             error.append(str(e))
         return ResponseError(error)
+def ViewParameters(request):
+    try:
+        error = []
+
+        # Check if there is an error
+        if error:
+            raise Exception()
+
+        # Response
+        return ResponseSuccessful()
+        
+    except Exception as e:
+        # Response a error code and error content
+        if str(e):
+            error.append(str(e))
+        return ResponseError(error)
