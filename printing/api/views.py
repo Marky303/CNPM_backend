@@ -7,6 +7,7 @@ from printing.api.Functions.CRUD import *
 from printing.api.Functions.response import *
 from printing.api.Functions.printerAPI import *
 from printing.api.serializers import *
+from account.api.serializers import *
 
 # Print document view
 @api_view(['POST'])
