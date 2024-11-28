@@ -6,6 +6,7 @@ from decimal import Decimal
 
 # Import models
 from printing.models import *
+from account.models import *
 
 def CreateNewPrintHistory(request):
     pass
