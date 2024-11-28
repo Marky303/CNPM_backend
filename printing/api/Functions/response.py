@@ -12,3 +12,12 @@ def ResponseSuccessful(content, status=status.HTTP_202_ACCEPTED):
 def ResponseError(error=["Something happened"]):
     content = {'error': error}
     return Response(content, status=status.HTTP_400_BAD_REQUEST)    
+
+def ResponseNotFound(error=["Not found"]):
+    content = {'error': error}
+    return Response(content, status=status.HTTP_404_NOT_FOUND)   
+
+
+def ResponseUnauthorized(error=["Unauthorized"]):
+    content = {'error': error}
+    return Response(content, status=status.HTTP_403_FORBIDDEN)   
