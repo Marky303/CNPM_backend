@@ -1,4 +1,6 @@
+import datetime
 import ast
+import re
 
 def VerifyPrintInfo(request, error):
     # Get print info from reques
