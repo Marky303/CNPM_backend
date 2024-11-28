@@ -9,3 +9,11 @@ from printing.models import *
 
 def CreateNewPrintHistory(request):
     pass
+
+def ViewAllStudent(request):
+    students = UserAccount.object.all()
+    return students
+
+def ViewAllHistoryRecord(request):
+    records = History.objects.all()
+    return records
