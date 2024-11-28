@@ -10,4 +10,6 @@ urlpatterns = [
     path('viewanalysis/', views.ViewAnalysis),
     path('adjustparameters/', views.AdjustParameters),
     path('viewparameters/', views.ViewParameters),
+    path('viewhistory/',views.ViewHistoryRecord),
+    path('viewstudents/', views.ViewStudent),
 ]
