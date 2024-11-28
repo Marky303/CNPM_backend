@@ -71,3 +71,77 @@ def EditParameters(request):
         if str(e):
             error.append(str(e))
         return ResponseError(error)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])   
+def ViewStudent(request):
+    try:
+        user_roles = request.user.groups.values_list('name', flat=True)
+        if not ('admin' in user_roles or 'SPSO' in user_roles):
+            return ResponseUnauthorized()
+        errors = []
+        VerifyStudentInfo(request, errors)
+        if errors:
+            return ResponseError(errors)
+
+        filters = ast.literal_eval(request.body.decode("UTF-8"))
+        name = filters.get('name')
+        student_id = filters.get('student_id')
+
+        students = UserAccount.objects.all()
+        if name:
+            students = students.filter(name__icontains=name)
+        if student_id:
+            students = students.filter(student_id=student_id)
+        if not students.exists():
+                return ResponseNotFound("Student not found.")
+        account_ids = students.values_list('id', flat=True)
+        return account_ids
+    except Exception as e:
+        return ResponseError([str(e)] if str(e) else ["Unexpected error occurred."])
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def ViewHistoryRecord(request):
+    try:
+        user_roles = request.user.groups.values_list('name', flat=True)
+        errors = []
+
+        if 'admin' in user_roles or 'SPSO' in user_roles:
+            VerifyHistoryRecord(request, errors)
+            if errors:
+                return ResponseError(errors)
+
+            filters = ast.literal_eval(request.body.decode("UTF-8"))
+            account_id = ViewStudent(request)
+            records = ViewAllHistoryRecord(request).filter(account_id=account_id)
+
+            if 'start_date' in filters and 'end_date' in filters:
+                records = records.filter(
+                    date__range=(
+                        datetime.strptime(filters['start_date'], "%d-%m-%Y"),
+                        datetime.strptime(filters['end_date'], "%d-%m-%Y")
+                    )
+                )
+            if 'printer' in filters:
+                records = records.filter(printer=filters['printer'])
+
+            if not records.exists():
+                return ResponseNotFound("No matching history records found.")
+
+            serializer = HistorySerializer(records, many=True)
+            return ResponseSuccessful(serializer.data, status_code=200)
+
+        elif 'User' in user_roles:
+            records = ViewAllHistoryRecord(request).filter(user=request.user)
+            if not records.exists():
+                return ResponseNotFound("No history records found.")
+
+            serializer = HistorySerializer(records, many=True)
+            return ResponseSuccessful(serializer.data, status_code=200)
+
+        else:
+            return ResponseUnauthorized()
+    except Exception as e:
+        return ResponseError([str(e)] if str(e) else ["Unexpected error occurred."])
