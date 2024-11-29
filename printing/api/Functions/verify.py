@@ -47,3 +47,4 @@ def VerifyHistoryRecord(request, error):
     if printer_filter:
         if not isinstance(printer_filter, str):
             error.append("Invalid printer filter.")
+def VerifyNewParameters(request, error): pass
