@@ -11,6 +11,6 @@ urlpatterns = [
     # Printing application
     path('spss/', include('printing.api.urls')),
     
-    # Note model for testing
-    path('notes/', include('account.api.urls'))
+    # User authentication related
+    path('account/', include('account.api.urls'))
 ]

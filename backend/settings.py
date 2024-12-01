@@ -151,7 +151,7 @@ SIMPLE_JWT = {
 # JWT settings/configurations
 SIMPLE_JWT = {
     # Access token's lifespan
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10000),
     
     # Refresh token lifespan (login after 10 days)
     "REFRESH_TOKEN_LIFETIME": timedelta(days=15),
