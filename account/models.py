@@ -30,8 +30,9 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     
     # Other informative user fields
-    StudentID       = models.PositiveIntegerField(null=False, default=0)
-    Token           = models.PositiveIntegerField(null=False, default=0)
+    studentID       = models.PositiveIntegerField(null=False, default=0)
+    token           = models.PositiveIntegerField(null=False, default=0)
+    is_SPSO         = models.BooleanField(default=False)
     
     # Choosing email as username for login/signup
     USERNAME_FIELD = 'email'

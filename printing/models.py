@@ -10,16 +10,15 @@ decimalPlace    = 4   # os.getenv('DATABASE_DECIMAL_PLACE')
 # Model declaration
 class PrinterStatusEnum(models.TextChoices):
     AVAILABLE = 'Available'
-    PRINTING = 'Printing'
     MAINTENANCE = 'Maintenance'
 
 class Printer(models.Model):
     # Normal fields
     Name                = models.CharField(max_length=mediumLength, blank=False)         
     SerialNumber        = models.CharField(max_length=shortLength, blank=False)
-    ConnectionKey       = models.CharField(max_length=mediumLength, blank=False)
+    Brand               = models.CharField(max_length=mediumLength, blank=False)
     Location            = models.CharField(max_length=shortLength, blank=False)
-    Building            = models.CharField(max_length=shortLength, blank=False)
+    Model               = models.CharField(max_length=shortLength, blank=False)
     Status = models.CharField(
         max_length=shortLength,
         choices=PrinterStatusEnum.choices,

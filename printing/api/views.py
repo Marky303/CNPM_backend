@@ -36,3 +36,110 @@ def PrintDocument(request):
         if str(e):
             error.append(str(e))
         return ResponseError(error)
+    
+    
+# Printer management______________________________________________
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def GetAllPrinters(request):
+    try:
+        error = []
+        
+        # Error check...
+        
+        # Check if there is an error
+        if error:
+            raise Exception()
+        
+        # Get all printer from database
+        data = GetAllPrintersCRUD()
+        
+        # Serialize the thingy
+        serializedData = PrinterSerializer(data, many=True)
+        
+        # Response
+        return ResponseObject(serializedData.data)
+        
+    except Exception as e:
+        # Response a error code and error content
+        if str(e):
+            error.append(str(e))
+        return ResponseError(error)
+    
+    
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def CreateNewPrinter(request):
+    try:
+        error = []
+        
+        # Error check...
+        
+        # Check if there is an error
+        if error:
+            raise Exception()
+        
+        # Create new printer in database
+        data = CreateNewPrinterCRUD(request)
+        
+        # Response
+        return ResponseSuccessful("Created new printer")
+        
+    except Exception as e:
+        # Response a error code and error content
+        if str(e):
+            error.append(str(e))
+        return ResponseError(error)
+    
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def EditPrinter(request):
+    try:
+        error = []
+        
+        # Error check...
+        
+        # Check if there is an error
+        if error:
+            raise Exception()
+        
+        # Edit printer in database
+        EditPrinterCRUD(request)
+        
+        # Response
+        return ResponseSuccessful("Edited printer")
+        
+    except Exception as e:
+        # Response a error code and error content
+        if str(e):
+            error.append(str(e))
+        return ResponseError(error)
+    
+    
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def DeletePrinter(request):
+    try:
+        error = []
+        
+        # Error check...
+        
+        # Check if there is an error
+        if error:
+            raise Exception()
+        
+        # Delete printer from database
+        DeletePrinterCRUD(request)
+        
+        # Response
+        return ResponseSuccessful("Deleted printer")
+        
+    except Exception as e:
+        # Response a error code and error content
+        if str(e):
+            error.append(str(e))
+        return ResponseError(error)
