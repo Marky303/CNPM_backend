@@ -1,4 +1,5 @@
 from django.db import models
+from account.models import *
 
 # Get common database properties
 shortLength     = 50  # os.getenv('DATABASE_SHORT_FIELD_LENGTH')
@@ -36,19 +37,33 @@ class PaperTypeEnum(models.TextChoices):
     
 class History(models.Model):
     # Normal fields
-    Date                = models.CharField(max_length=mediumLength, blank=False)         
-    PaperType           = models.CharField(max_length=shortLength, blank=False)
-    Quantity            = models.PositiveIntegerField(null=False, default=1)
-    TotalCost           = models.PositiveIntegerField(null=False, default=0)
-    PaperType = models.CharField(
+    Date                = models.CharField(max_length=mediumLength, blank=True, null=True)
+    Location            = models.CharField(max_length=shortLength, blank=True, null=True)
+    Direction           = models.CharField(max_length=shortLength, blank=True, null=True)
+    FileName            = models.CharField(max_length=longLength, blank=True, null=True)
+    Pages               = models.PositiveIntegerField(null=False, default=1)       
+    Copies              = models.PositiveIntegerField(null=False, default=1)   
+    Cost                = models.PositiveIntegerField(null=False, default=1)
+    FileType            = models.CharField(max_length=shortLength, blank=True, null=True)
+    Size = models.CharField(
         max_length=shortLength,
         choices=PaperTypeEnum.choices,
         default=PaperTypeEnum.A4,
     )
     
+    # Foreignkey field
+    Printer             = models.ForeignKey(Printer, on_delete=models.SET_NULL, null=True)
+    User                = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, null=True)
+    
     # Admin page default function
     def __str__(self):
         return str(self.id) + " - " + str(self.TotalCost)
+    
+class Setting(models.Model):
+    # Normal fields
+    AllowedFiles        = models.CharField(max_length=mediumLength, blank=True, null=True)
+    Token               = models.PositiveIntegerField(null=False, default=1)
+    Time                = models.CharField(max_length=mediumLength, blank=True, null=True)
     
     
     
