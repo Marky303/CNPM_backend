@@ -8,6 +8,31 @@ from printing.api.Functions.response import *
 from printing.api.Functions.printerAPI import *
 from printing.api.serializers import *
 
+# Get dashboard_____________________________________________________
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def GetDashboard(request):
+    try:
+        error = []
+        
+        # Check if there is an error
+        if error:
+            raise Exception()
+        
+        # Get all printer from database
+        data = GetDashboardCRUD()
+        
+        serializedData = SerializeResponse(data)
+        
+        # Response
+        return ResponseObject(serializedData)
+        
+    except Exception as e:
+        # Response a error code and error content
+        if str(e):
+            error.append(str(e))
+        return ResponseError(error)
+
 # Settings related__________________________________________________
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

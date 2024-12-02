@@ -5,6 +5,9 @@ from . import views
 
 # Setting up urls patterns
 urlpatterns = [
+    # Dashboard
+    path('dashboard/'           , views.GetDashboard),
+    
     # Setting
     path('getsettings/'         , views.GetSettings),
     path('changesettings/'      , views.ChangeSettings),

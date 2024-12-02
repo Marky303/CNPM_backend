@@ -57,7 +57,7 @@ class History(models.Model):
     
     # Admin page default function
     def __str__(self):
-        return str(self.id) + " - " + str(self.TotalCost)
+        return str(self.id) + " - " + str(self.Cost)
     
 class Setting(models.Model):
     # Normal fields
